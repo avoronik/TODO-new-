@@ -191,7 +191,7 @@ extension ViewController: UITableViewDelegate {
         }
     }
 }
-    
+
     private extension ViewController {
         
         func setupUI() {
