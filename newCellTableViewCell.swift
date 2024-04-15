@@ -7,16 +7,24 @@
 
 import UIKit
 
-class newCellTableViewCell: UITableViewCell {
+protocol newCellDelegate: AnyObject {
+    func noteIsDone(cell: newCellTableViewCell)
+}
 
+class newCellTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var firstTitle: UILabel!
     @IBOutlet weak var secondTitle: UILabel!
     @IBOutlet weak var groupImage: UIImageView!
+    
+    weak var delegate: newCellDelegate?
     
     var text1: String = ""
     var note: Note!
     
     func addNote(note: Note, isCompleted: Bool) {
+        
+        let setImage = isCompleted ? "checkmark.circle.fill" : "checkmark.circle"
         
         firstTitle.textColor = .black
         firstTitle.textAlignment = .left
@@ -24,41 +32,46 @@ class newCellTableViewCell: UITableViewCell {
         firstTitle.font = .monospacedSystemFont(ofSize: 20, weight: .regular)
         firstTitle.text = text1
         
-        secondTitle.textColor = .systemGray3
+        secondTitle.textColor = .systemGray
         secondTitle.textAlignment = .left
         secondTitle.numberOfLines = 1
-        secondTitle.font = .monospacedSystemFont(ofSize: 10, weight: .thin)
+        secondTitle.font = .systemFont(ofSize: 13, weight: .thin)
         
         groupImage.tintColor = .black
+        
         let checkmark = UIButton(type: .custom)
         checkmark.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        checkmark.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        checkmark.setImage(UIImage(systemName: setImage), for: .normal)
         checkmark.tintColor = .black
         checkmark.addTarget(self, action: #selector(checkmarkDone), for: .touchUpInside)
-        
         accessoryView = checkmark
         
-        firstTitle.text = note.title
+        let attrString = NSMutableAttributedString(string: note.title)
+        attrString.addAttributes([
+            .foregroundColor: UIColor.systemBlue
+        ], range: NSRange(location: .zero, length: 1))
+        attrString.addAttributes([
+            .font: UIFont(name: "Phosphate", size: 20)!
+        ], range: NSRange(location: .zero, length: attrString.string.count))
+        firstTitle.attributedText = attrString
         secondTitle.text = note.group
         groupImage.image = note.image
-
-       
+        
     }
     
     @objc private func checkmarkDone(_ sender: UIButton) {
-//        note.isCompleted.toggle()
-  
-            sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            sender.tintColor = .black
+    
+        delegate?.noteIsDone(cell: self)
+        
+        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        sender.tintColor = .black
         
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        
     }
 }
+    
 

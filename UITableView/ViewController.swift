@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, newCellDelegate {
    
    
     var newNote: [Note] = []
@@ -30,9 +30,11 @@ class ViewController: UIViewController {
         mainTitle.textColor = .black
         mainTitle.text = "\(dateFormater.string(from: getDate))"
         mainTitle.numberOfLines = 2
-        mainTitle.font = .monospacedSystemFont(ofSize: 30, weight: .heavy)
+        mainTitle.font = (UIFont(name: "Phosphate", size: 35))
+//            .monospacedSystemFont(ofSize: 30, weight: .heavy)
+
+           
         mainTitle.textAlignment = .left
-        
         return mainTitle
     }()
   
@@ -48,7 +50,32 @@ class ViewController: UIViewController {
        
         setupUI()
     }
+
+    func noteIsDone(cell: newCellTableViewCell) {
+        guard let index = tableView.indexPath(for: cell) else {return}
+        
+        switch index.section {
+        case 0:
+            if index.row < newNote.count {
+                var added = newNote[index.row]
+                added.isCompleted.toggle()
+                completed.append(added)
+                newNote.remove(at: index.row)
+            }
+        case 1:
+            if index.row < completed.count {
+                var isDone = completed[index.row]
+                isDone.isCompleted.toggle()
+                newNote.append(isDone)
+                completed.remove(at: index.row)
+            }
+        default:
+                print("cell not found")
+        }
+        tableView.reloadData()
+    }
 }
+  
 
 extension ViewController: UITableViewDataSource {
     
@@ -76,13 +103,14 @@ extension ViewController: UITableViewDataSource {
             
             if indexPath.row < newNote.count {
                 let newNoteCell = newNote[indexPath.row]
-                cell.addNote(note: newNoteCell
-                             , isCompleted: false)
+                cell.delegate = self
+                cell.addNote(note: newNoteCell, isCompleted: false)
             }
         case 1:
 
             if  indexPath.row < completed.count {
                 let completedCell = completed[indexPath.row]
+                cell.delegate = self
                 cell.addNote(note: completedCell, isCompleted: true)
                 
             }
@@ -147,9 +175,9 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+       
         newNote.swapAt(sourceIndexPath.row, destinationIndexPath.row)
-        // замена индекса перемещаемого объекта на индекс той строки, на которое место он стал
-//        completed.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+       
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -176,7 +204,7 @@ extension ViewController: UITableViewDelegate {
                 
                 mainTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
                 mainTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-                mainTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+                mainTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
                 mainTitle.heightAnchor.constraint(equalToConstant: 80),
                 
                 tableView.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 5),
@@ -193,6 +221,8 @@ extension ViewController: UITableViewDelegate {
             
             self.navigationItem.rightBarButtonItem = addButton
         }
+        
+       
         
         func makeTableView() -> UITableView {
             

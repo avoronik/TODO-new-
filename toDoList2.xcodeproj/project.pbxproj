@@ -17,6 +17,9 @@
 		B45776922BC9B00C002899D2 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45776912BC9B00B002899D2 /* Note.swift */; };
 		B45776952BCBB989002899D2 /* newCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45776932BCBB989002899D2 /* newCellTableViewCell.swift */; };
 		B45776962BCBB989002899D2 /* newCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B45776942BCBB989002899D2 /* newCellTableViewCell.xib */; };
+		B457769B2BCD5BDF002899D2 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B45776972BCD5BDF002899D2 /* Impact.ttf */; };
+		B457769C2BCD5BDF002899D2 /* Papyrus.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B45776982BCD5BDF002899D2 /* Papyrus.ttc */; };
+		B457769D2BCD5BDF002899D2 /* Phosphate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B45776992BCD5BDF002899D2 /* Phosphate.ttc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		B45776912BC9B00B002899D2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		B45776932BCBB989002899D2 /* newCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCellTableViewCell.swift; sourceTree = "<group>"; };
 		B45776942BCBB989002899D2 /* newCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = newCellTableViewCell.xib; sourceTree = "<group>"; };
+		B45776972BCD5BDF002899D2 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
+		B45776982BCD5BDF002899D2 /* Papyrus.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Papyrus.ttc; sourceTree = "<group>"; };
+		B45776992BCD5BDF002899D2 /* Phosphate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Phosphate.ttc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +54,7 @@
 		B45733B42B9DDB9A007A734C = {
 			isa = PBXGroup;
 			children = (
+				B457769A2BCD5BDF002899D2 /* fonts */,
 				B45776932BCBB989002899D2 /* newCellTableViewCell.swift */,
 				B45776942BCBB989002899D2 /* newCellTableViewCell.xib */,
 				B45776912BC9B00B002899D2 /* Note.swift */,
@@ -77,6 +84,16 @@
 				B45733CE2B9DDB9D007A734C /* Info.plist */,
 			);
 			path = UITableView;
+			sourceTree = "<group>";
+		};
+		B457769A2BCD5BDF002899D2 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B45776972BCD5BDF002899D2 /* Impact.ttf */,
+				B45776982BCD5BDF002899D2 /* Papyrus.ttc */,
+				B45776992BCD5BDF002899D2 /* Phosphate.ttc */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,10 +154,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B457769C2BCD5BDF002899D2 /* Papyrus.ttc in Resources */,
 				B45733CA2B9DDB9D007A734C /* Assets.xcassets in Resources */,
 				B45733CD2B9DDB9D007A734C /* Base in Resources */,
 				B45776962BCBB989002899D2 /* newCellTableViewCell.xib in Resources */,
 				B45733C82B9DDB9A007A734C /* Base in Resources */,
+				B457769B2BCD5BDF002899D2 /* Impact.ttf in Resources */,
+				B457769D2BCD5BDF002899D2 /* Phosphate.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
